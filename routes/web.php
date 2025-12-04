@@ -8,12 +8,12 @@ use App\Livewire\CalculadoraImpuestos;
 
 // Landing Page principal
 Route::get('/', function () {
-    return view('welcome-new');
+    return view('pages.welcome-new');
 })->name('home');
 
 // Página Nosotros
 Route::get('/nosotros', function () {
-    return view('nosotros');
+    return view('pages.nosotros');
 })->name('nosotros');
 
 // Ruta de Login
@@ -33,25 +33,25 @@ Route::get('/terrestre', CalculadoraTerrestre::class)->name('calculadora.terrest
 Route::get('/impuestos', CalculadoraImpuestos::class)->name('calculadora.impuestos');
 // Rutas de servicios adicionales
 Route::get('/importaciones-exportaciones', function () {
-    return view('importaciones-exportaciones');
+    return view('pages.importaciones-exportaciones');
 })->name('importaciones.exportaciones');
 
 Route::get('/capacitaciones', function () {
-    return view('capacitaciones');
+    return view('pages.capacitaciones');
 })->name('capacitaciones');
 
 Route::get('/logistica-transporte', function () {
-    return view('logistica-transporte');
+    return view('pages.logistica-transporte');
 })->name('logistica.transporte');
 
 Route::get('/criptomonedas', function () {
-    return view('criptomonedas');
+    return view('pages.criptomonedas');
 })->name('criptomonedas');
 
 Route::get('/ecommerce', function () {
-    return view('ecommerce');
+    return view('pages.ecommerce');
 })->name('ecommerce');
 
 Route::get('/subastas', function () {
-    return view('subastas');
+    return view('pages.subastas');
 })->name('subastas');
