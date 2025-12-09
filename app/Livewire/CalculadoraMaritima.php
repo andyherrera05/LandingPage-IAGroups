@@ -251,29 +251,139 @@ class CalculadoraMaritima extends Component
     private function searchPorts($query)
     {
         $ports = [
-            ['code' => 'CNSZN', 'name' => 'SHEN ZHEN-深圳', 'country' => 'China'],
-            ['code' => 'CNGUA', 'name' => 'GUANG ZHOU-广州', 'country' => 'China'],
-            ['code' => 'CNSHA', 'name' => 'SHANG HAI-上海', 'country' => 'China'],
-            ['code' => 'HKHKG', 'name' => 'HONG KONG-香港', 'country' => 'Hong Kong'],
-            ['code' => 'CNXMN', 'name' => 'XIA MEN-厦门', 'country' => 'China'],
-            ['code' => 'CNNBO', 'name' => 'NING BO-宁波', 'country' => 'China'],
-            ['code' => 'CNQIN', 'name' => 'QING DAO-青岛', 'country' => 'China'],
-            ['code' => 'CNTJN', 'name' => 'TIAN JIN-天津', 'country' => 'China'],
-            ['code' => 'SGSGP', 'name' => 'Singapore', 'country' => 'Singapore'],
-            ['code' => 'USNYC', 'name' => 'New York', 'country' => 'United States'],
-            ['code' => 'USLAX', 'name' => 'Los Angeles', 'country' => 'United States'],
-            ['code' => 'NLRTM', 'name' => 'Rotterdam', 'country' => 'Netherlands'],
-            ['code' => 'DEHAM', 'name' => 'Hamburg', 'country' => 'Germany'],
-            ['code' => 'AREZE', 'name' => 'Buenos Aires', 'country' => 'Argentina'],
-            ['code' => 'CLSAI', 'name' => 'Valparaíso', 'country' => 'Chile'],
-            ['code' => 'BRSSZ', 'name' => 'Santos', 'country' => 'Brazil'],
+            // Sudeste asiático (China, Singapur, etc.)
+            ['code' => 'CNSZN', 'name' => 'Shen Zhen', 'country' => 'China', 'region' => 'Sudeste asiático'],
+            ['code' => 'CNGUA', 'name' => 'Guang Zhou', 'country' => 'China', 'region' => 'Sudeste asiático'],
+            ['code' => 'CNSHA', 'name' => 'Shang Hai', 'country' => 'China', 'region' => 'Sudeste asiático'],
+            ['code' => 'HKHKG', 'name' => 'Hong Kong', 'country' => 'Hong Kong', 'region' => 'Sudeste asiático'],
+            ['code' => 'CNXMN', 'name' => 'Xia Men', 'country' => 'China', 'region' => 'Sudeste asiático'],
+            ['code' => 'CNNBO', 'name' => 'Ning Bo', 'country' => 'China', 'region' => 'Sudeste asiático'],
+            ['code' => 'CNQIN', 'name' => 'Qing Dao', 'country' => 'China', 'region' => 'Sudeste asiático'],
+            ['code' => 'CNTJN', 'name' => 'Tian Jin', 'country' => 'China', 'region' => 'Sudeste asiático'],
+            ['code' => 'SGSGP', 'name' => 'Singapore', 'country' => 'Singapore', 'region' => 'Sudeste asiático'],
+            
+            // Japón, Corea del Sur y Taiwán
+            ['code' => 'JPTOK', 'name' => 'Tokyo', 'country' => 'Japón', 'region' => 'Japón, Corea del Sur y Taiwán'],
+            ['code' => 'JPOSK', 'name' => 'Osaka', 'country' => 'Japón', 'region' => 'Japón, Corea del Sur y Taiwán'],
+            ['code' => 'JPYOK', 'name' => 'Yokohama', 'country' => 'Japón', 'region' => 'Japón, Corea del Sur y Taiwán'],
+            ['code' => 'JPKOB', 'name' => 'Kobe', 'country' => 'Japón', 'region' => 'Japón, Corea del Sur y Taiwán'],
+            ['code' => 'KRBUS', 'name' => 'Busan', 'country' => 'Corea del Sur', 'region' => 'Japón, Corea del Sur y Taiwán'],
+            ['code' => 'KRINC', 'name' => 'Inchon', 'country' => 'Corea del Sur', 'region' => 'Japón, Corea del Sur y Taiwán'],
+            ['code' => 'TWKAO', 'name' => 'Kaohsiung', 'country' => 'Taiwán', 'region' => 'Japón, Corea del Sur y Taiwán'],
+            ['code' => 'TWKEE', 'name' => 'Keelung', 'country' => 'Taiwán', 'region' => 'Japón, Corea del Sur y Taiwán'],
+            
+            // Australia
+            ['code' => 'AUSYD', 'name' => 'Sydney', 'country' => 'Australia', 'region' => 'Australia'],
+            ['code' => 'AUMEL', 'name' => 'Melbourne', 'country' => 'Australia', 'region' => 'Australia'],
+            ['code' => 'AUBRI', 'name' => 'Brisbane', 'country' => 'Australia', 'region' => 'Australia'],
+            ['code' => 'AUFRE', 'name' => 'Fremantle', 'country' => 'Australia', 'region' => 'Australia'],
+            ['code' => 'AUADE', 'name' => 'Adelaida', 'country' => 'Australia', 'region' => 'Australia'],
+            ['code' => 'NZAUC', 'name' => 'Auckland', 'country' => 'Nueva Zelanda', 'region' => 'Australia'],
+            ['code' => 'NZLYT', 'name' => 'Lyttelton', 'country' => 'Nueva Zelanda', 'region' => 'Australia'],
+            ['code' => 'NZTAU', 'name' => 'Tauranga', 'country' => 'Nueva Zelanda', 'region' => 'Australia'],
+            
+            // Europa
+            ['code' => 'GBFEL', 'name' => 'Felixstowe', 'country' => 'Reino Unido', 'region' => 'Europa'],
+            ['code' => 'FRLEH', 'name' => 'Le Havre', 'country' => 'Francia', 'region' => 'Europa'],
+            ['code' => 'DEHAM', 'name' => 'Hamburg', 'country' => 'Alemania', 'region' => 'Europa'],
+            ['code' => 'NLROT', 'name' => 'Rotterdam', 'country' => 'Países Bajos', 'region' => 'Europa'],
+            ['code' => 'BEANT', 'name' => 'Antwerp', 'country' => 'Bélgica', 'region' => 'Europa'],
+            ['code' => 'GBSOU', 'name' => 'Southampton', 'country' => 'Reino Unido', 'region' => 'Europa'],
+            ['code' => 'BEZEE', 'name' => 'Zeebrugge', 'country' => 'Bélgica', 'region' => 'Europa'],
+            ['code' => 'RULED', 'name' => 'St.Petersburg', 'country' => 'Rusia', 'region' => 'Europa'],
+            ['code' => 'NOOSL', 'name' => 'Oslo', 'country' => 'Noruega', 'region' => 'Europa'],
+            
+            // América
+            ['code' => 'USLGB', 'name' => 'Long Beach', 'country' => 'Estados Unidos', 'region' => 'América'],
+            ['code' => 'USLAX', 'name' => 'Los Angeles', 'country' => 'Estados Unidos', 'region' => 'América'],
+            ['code' => 'USNYC', 'name' => 'New York', 'country' => 'Estados Unidos', 'region' => 'América'],
+            ['code' => 'USSEA', 'name' => 'Seattle', 'country' => 'Estados Unidos', 'region' => 'América'],
+            ['code' => 'USOAK', 'name' => 'Oakland', 'country' => 'Estados Unidos', 'region' => 'América'],
+            ['code' => 'USTAC', 'name' => 'Tacoma', 'country' => 'Estados Unidos', 'region' => 'América'],
+            ['code' => 'USNFK', 'name' => 'Norfolk', 'country' => 'Estados Unidos', 'region' => 'América'],
+            ['code' => 'USSAV', 'name' => 'Savannah', 'country' => 'Estados Unidos', 'region' => 'América'],
+            ['code' => 'USMIA', 'name' => 'Miami', 'country' => 'Estados Unidos', 'region' => 'América'],
+            ['code' => 'USCHA', 'name' => 'Charleston', 'country' => 'Estados Unidos', 'region' => 'América'],
+            ['code' => 'CAVCR', 'name' => 'Vancouver', 'country' => 'Canadá', 'region' => 'América'],
+            ['code' => 'CATOR', 'name' => 'Toronto', 'country' => 'Canadá', 'region' => 'América'],
+            ['code' => 'CAMTL', 'name' => 'Montreal', 'country' => 'Canadá', 'region' => 'América'],
+            
+            // El Mar Negro en el Mediterráneo
+            ['code' => 'ITGOA', 'name' => 'Genova', 'country' => 'Italia', 'region' => 'El Mar Negro en el Mediterráneo'],
+            ['code' => 'ITNAP', 'name' => 'Napoles', 'country' => 'Italia', 'region' => 'El Mar Negro en el Mediterráneo'],
+            ['code' => 'ESBCN', 'name' => 'Barcelona', 'country' => 'España', 'region' => 'El Mar Negro en el Mediterráneo'],
+            ['code' => 'ESVAL', 'name' => 'Valencia', 'country' => 'España', 'region' => 'El Mar Negro en el Mediterráneo'],
+            ['code' => 'FRMRS', 'name' => 'Marsella', 'country' => 'Francia', 'region' => 'El Mar Negro en el Mediterráneo'],
+            ['code' => 'ROCON', 'name' => 'Constanza', 'country' => 'Rumania', 'region' => 'El Mar Negro en el Mediterráneo'],
+            ['code' => 'SIKOP', 'name' => 'Koper', 'country' => 'Eslovenia', 'region' => 'El Mar Negro en el Mediterráneo'],
+            ['code' => 'UAODE', 'name' => 'Odessa', 'country' => 'Ucrania', 'region' => 'El Mar Negro en el Mediterráneo'],
+            ['code' => 'TRIST', 'name' => 'Estambul', 'country' => 'Turquía', 'region' => 'El Mar Negro en el Mediterráneo'],
+            ['code' => 'HRRIJ', 'name' => 'Rijeka', 'country' => 'Croacia', 'region' => 'El Mar Negro en el Mediterráneo'],
+            
+            // Oriente Medio
+            ['code' => 'AEJEA', 'name' => 'Jebel Ali', 'country' => 'Emiratos Árabes', 'region' => 'Oriente Medio'],
+            ['code' => 'BHBAH', 'name' => 'Bahrein', 'country' => 'Bahrein', 'region' => 'Oriente Medio'],
+            ['code' => 'IRBND', 'name' => 'Abbas', 'country' => 'Irán', 'region' => 'Oriente Medio'],
+            ['code' => 'KWKUW', 'name' => 'Kuwait', 'country' => 'Kuwait', 'region' => 'Oriente Medio'],
+            ['code' => 'SAJED', 'name' => 'Jeddah', 'country' => 'Arabia Saudita', 'region' => 'Oriente Medio'],
+            ['code' => 'SADAM', 'name' => 'Damasco', 'country' => 'Arabia Saudita', 'region' => 'Oriente Medio'],
+            ['code' => 'SDPSU', 'name' => 'Port Sudan', 'country' => 'Sudán', 'region' => 'Oriente Medio'],
+            ['code' => 'JOAQJ', 'name' => 'Aqaba', 'country' => 'Jordania', 'region' => 'Oriente Medio'],
+            ['code' => 'EGPSD', 'name' => 'Port Said', 'country' => 'Egipto', 'region' => 'Oriente Medio'],
+            ['code' => 'ILHFA', 'name' => 'Haifa', 'country' => 'Israel', 'region' => 'Oriente Medio'],
+            ['code' => 'LBBEY', 'name' => 'Beirut', 'country' => 'Líbano', 'region' => 'Oriente Medio'],
+            ['code' => 'SYLAT', 'name' => 'Latakia', 'country' => 'Siria', 'region' => 'Oriente Medio'],
+            
+            // India y Pakistán
+            ['code' => 'LKCMB', 'name' => 'Colombo', 'country' => 'Sri Lanka', 'region' => 'India y Pakistán'],
+            ['code' => 'INNSA', 'name' => 'Nhava Sheva', 'country' => 'India', 'region' => 'India y Pakistán'],
+            ['code' => 'INDEL', 'name' => 'New Delhi', 'country' => 'India', 'region' => 'India y Pakistán'],
+            ['code' => 'INMAA', 'name' => 'Chennai', 'country' => 'India', 'region' => 'India y Pakistán'],
+            ['code' => 'INMUN', 'name' => 'Mundra', 'country' => 'India', 'region' => 'India y Pakistán'],
+            ['code' => 'INBLR', 'name' => 'Bangalore', 'country' => 'India', 'region' => 'India y Pakistán'],
+            ['code' => 'INCCU', 'name' => 'Calcutta', 'country' => 'India', 'region' => 'India y Pakistán'],
+            ['code' => 'BDCGP', 'name' => 'Chittagong', 'country' => 'Bangladesh', 'region' => 'India y Pakistán'],
+            ['code' => 'PKKHI', 'name' => 'Karachi', 'country' => 'Pakistán', 'region' => 'India y Pakistán'],
+            
+            // África
+            ['code' => 'KEMBA', 'name' => 'Mombasa', 'country' => 'Kenia', 'region' => 'África'],
+            ['code' => 'MZMPM', 'name' => 'Maputo', 'country' => 'Mozambique', 'region' => 'África'],
+            ['code' => 'TZDAR', 'name' => 'Dar es Salaam', 'country' => 'Tanzania', 'region' => 'África'],
+            ['code' => 'ZADUR', 'name' => 'Durban', 'country' => 'Sudáfrica', 'region' => 'África'],
+            ['code' => 'ZACPT', 'name' => 'Ciudad del Cabo', 'country' => 'Sudáfrica', 'region' => 'África'],
+            ['code' => 'BJCOO', 'name' => 'Cotonu', 'country' => 'Benin', 'region' => 'África'],
+            ['code' => 'GHTEM', 'name' => 'Tema', 'country' => 'Ghana', 'region' => 'África'],
+            ['code' => 'NGLOS', 'name' => 'Lagos', 'country' => 'Nigeria', 'region' => 'África'],
+            ['code' => 'TGLFM', 'name' => 'Lome', 'country' => 'Togo', 'region' => 'África'],
+            ['code' => 'MACAS', 'name' => 'Casablanca', 'country' => 'Marruecos', 'region' => 'África'],
+            ['code' => 'TNTUN', 'name' => 'Tunez', 'country' => 'Túnez', 'region' => 'África'],
+            ['code' => 'DZALG', 'name' => 'Algiers', 'country' => 'Argelia', 'region' => 'África'],
+            
+            // América Central y del Sur
+            ['code' => 'ARBUE', 'name' => 'Buenos Aires', 'country' => 'Argentina', 'region' => 'América Central y del Sur'],
+            ['code' => 'UYMVD', 'name' => 'Montevideo', 'country' => 'Uruguay', 'region' => 'América Central y del Sur'],
+            ['code' => 'BRSSZ', 'name' => 'Santos', 'country' => 'Brasil', 'region' => 'América Central y del Sur'],
+            ['code' => 'BRRIG', 'name' => 'Río Grande', 'country' => 'Brasil', 'region' => 'América Central y del Sur'],
+            ['code' => 'BRRIO', 'name' => 'Río de Janeiro', 'country' => 'Brasil', 'region' => 'América Central y del Sur'],
+            ['code' => 'PYASU', 'name' => 'Asuncion', 'country' => 'Paraguay', 'region' => 'América Central y del Sur'],
+            ['code' => 'COBUN', 'name' => 'Buenaventura', 'country' => 'Colombia', 'region' => 'América Central y del Sur'],
+            ['code' => 'PECLL', 'name' => 'Callao', 'country' => 'Perú', 'region' => 'América Central y del Sur'],
+            ['code' => 'ECGYE', 'name' => 'Guayaquil', 'country' => 'Ecuador', 'region' => 'América Central y del Sur'],
+            ['code' => 'CLIQQ', 'name' => 'Iquique', 'country' => 'Chile', 'region' => 'América Central y del Sur'],
+            ['code' => 'CLVAP', 'name' => 'Valparaiso', 'country' => 'Chile', 'region' => 'América Central y del Sur'],
+            ['code' => 'CLSAI', 'name' => 'San Antonio', 'country' => 'Chile', 'region' => 'América Central y del Sur'],
+            ['code' => 'MXZLO', 'name' => 'Manzanillo', 'country' => 'México', 'region' => 'América Central y del Sur'],
+            ['code' => 'PAPTY', 'name' => 'Panama City', 'country' => 'Panamá', 'region' => 'América Central y del Sur'],
+            ['code' => 'MXGDL', 'name' => 'Guadalajara', 'country' => 'México', 'region' => 'América Central y del Sur'],
+            ['code' => 'PRSJU', 'name' => 'San Juan', 'country' => 'Puerto Rico', 'region' => 'América Central y del Sur'],
         ];
         
         $query = strtolower($query);
         return array_values(array_filter($ports, function($port) use ($query) {
             return str_contains(strtolower($port['name']), $query) ||
                    str_contains(strtolower($port['code']), $query) ||
-                   str_contains(strtolower($port['country']), $query);
+                   str_contains(strtolower($port['country']), $query) ||
+                   str_contains(strtolower($port['region']), $query);
         }));
     }
     

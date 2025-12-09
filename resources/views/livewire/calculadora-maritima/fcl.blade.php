@@ -29,21 +29,52 @@
                 
                 <!-- Dropdown de Sugerencias POL -->
                 @if($showPOLDropdown && count($polSuggestions) > 0)
-                    <div class="absolute z-[9999] w-full mt-1 bg-gray-900 border-2 border-yellow-500 rounded-lg shadow-2xl max-h-64 overflow-y-auto">
-                        @foreach($polSuggestions as $port)
-                            <button 
-                                type="button"
-                                wire:click="selectPOL('{{ $port['code'] }}', '{{ $port['name'] }}')"
-                                class="w-full px-4 py-3 text-left hover:bg-yellow-500/10 transition-colors border-b border-gray-800 last:border-0">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <span class="text-yellow-400 font-bold text-sm">{{ $port['code'] }}</span>
-                                        <span class="text-white text-sm ml-2">{{ $port['name'] }}</span>
-                                    </div>
-                                    <span class="text-xs text-gray-500">{{ $port['country'] }}</span>
+                    <div class="absolute z-[9999] w-full mt-1 bg-white border-2 border-gray-200 rounded-lg shadow-2xl overflow-hidden" 
+                         x-data="{ activeRegion: null }"
+                         style="min-width: 800px; left: 0;">
+                        
+                        <!-- Pestañas de Regiones -->
+                        <div class="border-b border-gray-200 bg-gray-50 p-3">
+                            <div class="flex flex-wrap gap-2">
+                                @php
+                                    $regions = collect($polSuggestions)->pluck('region')->unique()->values();
+                                @endphp
+                                @foreach($regions as $index => $region)
+                                    <button 
+                                        type="button"
+                                        @click="activeRegion = activeRegion === '{{ $region }}' ? null : '{{ $region }}'"
+                                        :class="activeRegion === '{{ $region }}' ? 'bg-blue-500 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
+                                        class="px-4 py-2 rounded text-sm font-medium transition-all border border-gray-300">
+                                        {{ $region }}
+                                    </button>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <!-- Lista de Puertos -->
+                        <div class="max-h-80 overflow-y-auto p-3 bg-white">
+                            @foreach($regions as $region)
+                                <div x-show="activeRegion === '{{ $region }}' || activeRegion === null">
+                                    @if($loop->first || true)
+                                        <div class="mb-4">
+                                            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2 px-2" x-show="activeRegion === null">{{ $region }}</h4>
+                                            <div class="grid grid-cols-4 gap-2">
+                                                @foreach($polSuggestions as $port)
+                                                    @if($port['region'] === $region)
+                                                        <button 
+                                                            type="button"
+                                                            wire:click="selectPOL('{{ $port['code'] }}', '{{ $port['name'] }}')"
+                                                            class="text-left px-3 py-2 hover:bg-blue-50 rounded transition-colors text-sm text-gray-700 hover:text-blue-600">
+                                                            {{ $port['name'] }}
+                                                        </button>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
-                            </button>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 @endif
                 
@@ -76,21 +107,52 @@
                 
                 <!-- Dropdown de Sugerencias POD -->
                 @if($showPODDropdown && count($podSuggestions) > 0)
-                    <div class="absolute z-[9999] w-full mt-1 bg-gray-900 border-2 border-yellow-500 rounded-lg shadow-2xl max-h-64 overflow-y-auto">
-                        @foreach($podSuggestions as $port)
-                            <button 
-                                type="button"
-                                wire:click="selectPOD('{{ $port['code'] }}', '{{ $port['name'] }}')"
-                                class="w-full px-4 py-3 text-left hover:bg-yellow-500/10 transition-colors border-b border-gray-800 last:border-0">
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <span class="text-yellow-400 font-bold text-sm">{{ $port['code'] }}</span>
-                                        <span class="text-white text-sm ml-2">{{ $port['name'] }}</span>
-                                    </div>
-                                    <span class="text-xs text-gray-500">{{ $port['country'] }}</span>
+                    <div class="absolute z-[9999] w-full mt-1 bg-white border-2 border-gray-200 rounded-lg shadow-2xl overflow-hidden" 
+                         x-data="{ activeRegion: null }"
+                         style="min-width: 800px; right: 0;">
+                        
+                        <!-- Pestañas de Regiones -->
+                        <div class="border-b border-gray-200 bg-gray-50 p-3">
+                            <div class="flex flex-wrap gap-2">
+                                @php
+                                    $regions = collect($podSuggestions)->pluck('region')->unique()->values();
+                                @endphp
+                                @foreach($regions as $index => $region)
+                                    <button 
+                                        type="button"
+                                        @click="activeRegion = activeRegion === '{{ $region }}' ? null : '{{ $region }}'"
+                                        :class="activeRegion === '{{ $region }}' ? 'bg-blue-500 text-white' : 'bg-white text-gray-700 hover:bg-gray-100'"
+                                        class="px-4 py-2 rounded text-sm font-medium transition-all border border-gray-300">
+                                        {{ $region }}
+                                    </button>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <!-- Lista de Puertos -->
+                        <div class="max-h-80 overflow-y-auto p-3 bg-white">
+                            @foreach($regions as $region)
+                                <div x-show="activeRegion === '{{ $region }}' || activeRegion === null">
+                                    @if($loop->first || true)
+                                        <div class="mb-4">
+                                            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2 px-2" x-show="activeRegion === null">{{ $region }}</h4>
+                                            <div class="grid grid-cols-4 gap-2">
+                                                @foreach($podSuggestions as $port)
+                                                    @if($port['region'] === $region)
+                                                        <button 
+                                                            type="button"
+                                                            wire:click="selectPOD('{{ $port['code'] }}', '{{ $port['name'] }}')"
+                                                            class="text-left px-3 py-2 hover:bg-blue-50 rounded transition-colors text-sm text-gray-700 hover:text-blue-600">
+                                                            {{ $port['name'] }}
+                                                        </button>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
-                            </button>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 @endif
                 
